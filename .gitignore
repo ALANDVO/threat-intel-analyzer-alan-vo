@@ -10,6 +10,8 @@ build/
 .pytest_cache/
 .mypy_cache/
 *.log
+*.db
+*.sqlite
 .DS_Store
-frontend/node_modules/
-frontend/dist/
+.antigravitycli/
+.omp/

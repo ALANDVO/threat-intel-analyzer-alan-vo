@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "threat-intel-analyzer-alan-vo"
+version = "1.0.0"
+description = "AI-powered threat intelligence platform that ingests CVEs, IOC feeds, and news to produce prioritized, actionable security briefings with LLM-generated context and risk scoring."
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+authors = [
+    { name = "Alan Vo", email = "alanvo@gmail.com" }
+]
+keywords = ["threat-intelligence", "cve", "ioc", "cvss", "security-briefings", "risk-scoring"]
+
+[tool.pytest.ini_options]
+testpaths = ["backend/tests"]
+pythonpath = ["backend"]
+asyncio_mode = "auto"
