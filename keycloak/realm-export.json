@@ -1,0 +1,125 @@
+{
+  "id": "threat-intel-realm",
+  "realm": "threat-intel",
+  "displayName": "Threat Intelligence Analyzer",
+  "enabled": true,
+  "sslRequired": "external",
+  "registrationAllowed": false,
+  "loginWithEmailAllowed": true,
+  "duplicateEmailsAllowed": false,
+  "resetPasswordAllowed": true,
+  "editUsernameAllowed": false,
+  "roles": {
+    "realm": [
+      {
+        "id": "role-viewer",
+        "name": "viewer",
+        "description": "Read-only access to threat intelligence, assets, and briefings",
+        "composite": false,
+        "clientRole": false
+      },
+      {
+        "id": "role-analyst",
+        "name": "analyst",
+        "description": "Analyst access to execute scans, create CVE records, and synthesize briefings",
+        "composite": false,
+        "clientRole": false
+      },
+      {
+        "id": "role-admin",
+        "name": "admin",
+        "description": "Administrative access to delete resources and inspect full audit compliance trails",
+        "composite": false,
+        "clientRole": false
+      }
+    ]
+  },
+  "defaultRoles": [
+    "viewer"
+  ],
+  "clients": [
+    {
+      "id": "client-threat-intel",
+      "clientId": "threat-intel-analyzer",
+      "name": "Threat Intel Analyzer Portal",
+      "enabled": true,
+      "publicClient": false,
+      "secret": "threat-intel-keycloak-client-secret-placeholder",
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": false,
+      "redirectUris": [
+        "http://127.0.0.1:8000/api/v1/auth/callback",
+        "http://localhost:8000/api/v1/auth/callback",
+        "http://127.0.0.1:3000/*",
+        "http://localhost:3000/*"
+      ],
+      "webOrigins": [
+        "http://127.0.0.1:3000",
+        "http://localhost:3000",
+        "http://127.0.0.1:8000",
+        "http://localhost:8000"
+      ],
+      "attributes": {
+        "pkce.code.challenge.method": "S256",
+        "post.logout.redirect.uris": "http://127.0.0.1:3000/*##http://localhost:3000/*"
+      },
+      "protocolMappers": [
+        {
+          "name": "realm-roles-mapper",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-realm-role-mapper",
+          "consentRequired": false,
+          "config": {
+            "user.attribute": "roles",
+            "claim.name": "roles",
+            "jsonType.label": "String",
+            "id.token.claim": "true",
+            "access.token.claim": "true",
+            "multivalued": "true"
+          }
+        },
+        {
+          "name": "email-mapper",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-property-mapper",
+          "consentRequired": false,
+          "config": {
+            "user.attribute": "email",
+            "claim.name": "email",
+            "jsonType.label": "String",
+            "id.token.claim": "true",
+            "access.token.claim": "true"
+          }
+        }
+      ]
+    }
+  ],
+  "identityProviders": [
+    {
+      "alias": "enterprise-saml-idp",
+      "displayName": "Enterprise SAML Identity Provider",
+      "providerId": "saml",
+      "enabled": false,
+      "trustEmail": true,
+      "storeToken": false,
+      "addReadTokenRoleOnCreate": false,
+      "authenticateByDefault": false,
+      "linkOnly": false,
+      "firstBrokerLoginFlowAlias": "first broker login",
+      "config": {
+        "entityId": "http://127.0.0.1:8080/realms/threat-intel",
+        "singleSignOnServiceUrl": "https://idp.example.com/saml2/sso",
+        "nameIDPolicyFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress",
+        "principalType": "SUBJECT",
+        "signatureAlgorithm": "RSA_SHA256",
+        "wantAssertionsSigned": "true",
+        "wantAuthnRequestsSigned": "true",
+        "forceAuthn": "false",
+        "validateSignature": "true",
+        "signingCertificate": ""
+      }
+    }
+  ]
+}
