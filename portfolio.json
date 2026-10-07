@@ -16,5 +16,6 @@
     "anthropic",
     "gemini",
     "ollama"
-  ]
+  ],
+  "version": "1.0.0"
 }

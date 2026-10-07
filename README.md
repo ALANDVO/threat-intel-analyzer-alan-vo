@@ -1,5 +1,7 @@
 # Threat Intel Analyzer — Alan Vo | AI & Machine Learning
 
+Current version: `1.0.0`.
+
 A threat intelligence workbench for security analysts: import vulnerability records, correlate affected package versions against assets, prioritize findings, and generate briefings. A deterministic weighted keyword classifier and evaluation harness provide an offline baseline for threat categorization. Optional LLM explanations use an interchangeable server-side API adapter.
 
 ## Architecture
