@@ -35,7 +35,7 @@ class IOCParser:
         'url': re.compile(r"\bhttps?://[a-zA-Z0-9\-\._~:/\?#\[\]@!$&'\(\)\*\+,;=%]+\b"),
         'cidr': re.compile(r'\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}/(?:[0-9]|[1-2][0-9]|3[0-2])\b'),
         'ipv4': re.compile(r'\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b'),
-        'ipv6': re.compile(r'\b(?:[a-fA-F0-9]{1,4}:){7}[a-fA-F0-9]{1,4}\b'),
+        'ipv6_candidate': re.compile(r'(?<![a-zA-Z0-9:])(?:[0-9a-fA-F]{0,4}:){2,}[0-9a-fA-F]{0,4}(?![a-zA-Z0-9:])'),
         'sha256': re.compile(r'\b[a-fA-F0-9]{64}\b'),
         'sha1': re.compile(r'\b[a-fA-F0-9]{40}\b'),
         'md5': re.compile(r'\b[a-fA-F0-9]{32}\b'),
@@ -45,7 +45,10 @@ class IOCParser:
 
     @classmethod
     def defang(cls, text: str) -> str:
-        return text.replace('http://', 'hxxp://').replace('https://', 'hxxps://').replace('.', '[.]')
+        s = text.replace('http://', 'hxxp://').replace('https://', 'hxxps://').replace('.', '[.]')
+        if ':' in s and not s.startswith(('hxxp://', 'hxxps://')):
+            s = s.replace(':', '[:]')
+        return s
 
     @classmethod
     def refang(cls, text: str) -> str:
@@ -55,6 +58,16 @@ class IOCParser:
     def is_valid_ipv4(ip: str) -> bool:
         pts = ip.split('.')
         return len(pts) == 4 and all(p.isdigit() and 0 <= int(p) <= 255 for p in pts)
+
+    @staticmethod
+    def is_valid_ipv6(ip: str) -> bool:
+        if not ip or ip == ':': return False
+        try:
+            import ipaddress
+            ipaddress.IPv6Address(ip)
+            return True
+        except ValueError:
+            return False
 
     @classmethod
     def extract_iocs(cls, raw_text: str) -> List[IOCItem]:
@@ -70,8 +83,10 @@ class IOCParser:
             v = m.group()
             if cls.is_valid_ipv4(v) and v not in cidr_ips:
                 res['ipv4', v] = IOCItem(type='ipv4', value=v, defanged=cls.defang(v))
-        for m in cls.PATTERNS['ipv6'].finditer(ref):
-            v = m.group(); res['ipv6', v] = IOCItem(type='ipv6', value=v, defanged=cls.defang(v))
+        for m in cls.PATTERNS['ipv6_candidate'].finditer(ref):
+            v = m.group()
+            if cls.is_valid_ipv6(v):
+                res['ipv6', v] = IOCItem(type='ipv6', value=v, defanged=cls.defang(v))
         for t in ('sha256', 'sha1', 'md5'):
             for m in cls.PATTERNS[t].finditer(ref):
                 v = m.group().lower(); res[t, v] = IOCItem(type=t, value=v, defanged=v)

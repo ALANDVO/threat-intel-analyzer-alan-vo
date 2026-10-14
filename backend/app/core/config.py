@@ -25,8 +25,8 @@ class Settings(BaseSettings):
     OIDC_SCOPES: str = 'openid profile email roles'
     LLM_API_KEY: str = ''
     LLM_PROVIDER: Literal['openai-compatible', 'anthropic', 'gemini', 'ollama'] = 'openai-compatible'
-    LLM_BASE_URL: str = 'https://llm.chris-vo.com/v1'
-    LLM_MODEL: str = 'qwen3.8-27b'
+    LLM_BASE_URL: str = 'https://api.openai.com/v1'
+    LLM_MODEL: str = 'gpt-4o-mini'
     LLM_TIMEOUT_SECONDS: float = 15.0
 
     def validate_runtime_guards(self) -> None:
