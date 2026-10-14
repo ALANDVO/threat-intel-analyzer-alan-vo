@@ -4,7 +4,7 @@
   "owner": "ALANDVO",
   "email": "alanvo@gmail.com",
   "domain": "threat-intelligence-and-vulnerability-management",
-  "summary": "Deterministic CVE normalization, multi-factor risk scoring, and grounded LLM advisory briefings evaluated via a lexical ML threat taxonomy benchmark.",
+  "summary": "Work in progress: threat-intel-analyzer-alan-vo",
   "workflows": [
     "Threat ingestion and normalization with deterministic CVSS v3.1 calculation and IOC defanging",
     "Asset tech stack exposure correlation and multi-factor composite risk prioritization",
@@ -17,5 +17,6 @@
     "gemini",
     "ollama"
   ],
-  "version": "1.0.0"
+  "version": "1.0.0",
+  "status": "work-in-progress"
 }

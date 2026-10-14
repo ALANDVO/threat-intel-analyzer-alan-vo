@@ -70,3 +70,22 @@ def test_ioc_parser_refanging():
     defanged = "hxxps://attacker[.]org/gate[.]php on 10[.]0[.]1[.]5"
     refanged = IOCParser.refang(defanged)
     assert refanged == "https://attacker.org/gate.php on 10.0.1.5"
+
+
+def test_ioc_parser_ipv6_compressed_and_defanging():
+    v6_text = (
+        "Inbound telemetry detected beaconing from 2001:db8::1 and local loopback ::1, "
+        "as well as full address 2001:0db8:85a3:0000:0000:8a2e:0370:7334 to port 443."
+    )
+    iocs = IOCParser.extract_iocs(v6_text)
+    v6_iocs = {i.value: i for i in iocs if i.type == "ipv6"}
+
+    assert "2001:db8::1" in v6_iocs
+    assert "::1" in v6_iocs
+    assert "2001:0db8:85a3:0000:0000:8a2e:0370:7334" in v6_iocs
+
+    # Defanged representation must contain bracketed colons
+    for v, item in v6_iocs.items():
+        assert "[:]" in item.defanged
+        assert IOCParser.refang(item.defanged) == v
+

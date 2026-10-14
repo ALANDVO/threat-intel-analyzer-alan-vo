@@ -10,8 +10,8 @@ from app.services.llm_service import LLMProviderError, LLMService
 async def test_openai_compatible_adapter(monkeypatch):
     settings.LLM_PROVIDER = "openai-compatible"
     settings.LLM_API_KEY = "mock-secret-key-12345"
-    settings.LLM_BASE_URL = "https://llm.chris-vo.com/v1"
-    settings.LLM_MODEL = "qwen3.8-27b"
+    settings.LLM_BASE_URL = "https://api.openai.com/v1"
+    settings.LLM_MODEL = "gpt-4o-mini"
 
     captured_requests = []
 

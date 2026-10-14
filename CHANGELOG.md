@@ -1,25 +1,33 @@
 # Changelog
 
+## 1.1.0 — work-in-progress checkpoint
+
+Partial code published for continued development. Known issues: STATUS.md.
+
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.1.0] - 2026-10-07
+## [1.1.0] - 2026-10-14
 
 ### Added
+- Enhanced `IOCParser` with support for compressed and uncompressed IPv6 indicator detection and parsing (`ipaddress.IPv6Address`).
+- Reversible IPv6 colon defanging with bracketed notation (`[:]`) and refanging support.
+- Comprehensive automated test suite for IPv6 IOC extraction and defanging roundtrip.
+- Standardized product development plan (`feature-plan.json` and `PLAN.md`) and checkpoint status (`STATUS.md`).
+
+### Changed
+- Standardized LLM provider adapter defaults to provider-neutral values across backend settings, Compose, and unit tests.
 - Multi-container deployment architecture via `compose.yaml` with Keycloak 26 IAM broker and persistent storage volumes.
 - Production `backend/Dockerfile` and `frontend/Dockerfile` featuring nonroot users, multi-stage builds, and container healthchecks.
 - Automated CI pipeline in `.github/workflows/ci.yml` running pytest backend tests, TypeScript typechecking, Vitest frontend tests, and container image builds.
 - Machine Learning benchmark and threat classifier evaluation integration with reproducible baseline accuracy and macro F1 metrics.
 - Comprehensive security architecture and SAML/OIDC federated identity setup guide.
 
-### Changed
-- Standardized portfolio and pyproject metadata with AI/ML workflow summary.
-- Refactored frontend and backend source trees for enhanced maintainability and adherence to source size budget.
-
 ### Fixed
 - Enforced strict session expiration verification and CSRF token binding across write endpoints.
+
 
 ## [1.0.0] - 2026-10-07
 

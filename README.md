@@ -1,5 +1,8 @@
 # Threat Intel Analyzer — Alan Vo | AI & Machine Learning
 
+> Work in progress. This checkpoint may be incomplete or fail tests. See PLAN.md and STATUS.md before use.
+
+
 Current version: `1.0.0`.
 
 A threat intelligence workbench for security analysts: import vulnerability records, correlate affected package versions against assets, prioritize findings, and generate briefings. A deterministic weighted keyword classifier and evaluation harness provide an offline baseline for threat categorization. Optional LLM explanations use an interchangeable server-side API adapter.
@@ -37,7 +40,7 @@ In another terminal, run `npm run dev --prefix frontend` and open http://127.0.0
 
 ## Workflows and API reference
 
-Interactive request/response schemas are available at http://127.0.0.1:8000/docs. Data routes require an authenticated session. Cookie-authenticated mutations use the CSRF mechanism.
+Interactive request/response schemas are available at http://127.0.0.1:8000/docs. Data routes require an authenticated session. Cookie-authenticated mutations use the CSRF mechanism. Active roadmap and verification status are tracked in [PLAN.md](PLAN.md) and [STATUS.md](STATUS.md).
 
 | Route (under `/api/v1`) | Purpose |
 | --- | --- |

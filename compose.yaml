@@ -32,8 +32,8 @@ services:
       - OIDC_CLIENT_ID=threat-intel-analyzer
       - OIDC_CLIENT_SECRET=threat-intel-keycloak-client-secret-placeholder
       - LLM_PROVIDER=openai-compatible
-      - LLM_BASE_URL=https://llm.chris-vo.com/v1
-      - LLM_MODEL=qwen3.8-27b
+      - LLM_BASE_URL=https://api.openai.com/v1
+      - LLM_MODEL=gpt-4o-mini
       - LLM_API_KEY=
     volumes:
       - sqlite-data:/app/data
