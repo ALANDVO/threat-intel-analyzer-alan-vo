@@ -76,7 +76,7 @@ Tests: `backend/tests/test_domain_engines.py`
 
 ### cve-bulk-stix-import — STIX 2.1 threat intelligence bundle import and export
 
-Status: planned
+Status: in_progress
 
 Acceptance:
 - Ingests STIX 2.1 vulnerability and indicator bundle JSON payloads

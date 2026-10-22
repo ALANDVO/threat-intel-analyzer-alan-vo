@@ -98,12 +98,14 @@
     {
       "id": "cve-bulk-stix-import",
       "title": "STIX 2.1 threat intelligence bundle import and export",
-      "status": "planned",
+      "status": "in_progress",
       "acceptance": [
         "Ingests STIX 2.1 vulnerability and indicator bundle JSON payloads",
         "Maps STIX objects to internal VulnerabilityEntity and IOC records",
         "Exports selected briefings and scan findings as STIX 2.1 bundles"
-      ]
+      ],
+      "implementation": [],
+      "tests": []
     },
     {
       "id": "automated-webhook-alerts",
