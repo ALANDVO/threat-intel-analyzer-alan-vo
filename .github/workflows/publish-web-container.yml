@@ -1,0 +1,50 @@
+name: Publish web container
+on:
+  workflow_dispatch:
+  release:
+    types: [published]
+permissions:
+  contents: read
+  packages: write
+concurrency:
+  group: publish-web-container
+  cancel-in-progress: false
+jobs:
+  publish:
+    if: github.event.repository.private == false
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Build web image
+        env:
+          IMAGE: ghcr.io/alandvo/threat-intel-analyzer-alan-vo-web
+        run: |
+          docker build --label org.opencontainers.image.source=https://github.com/ALANDVO/threat-intel-analyzer-alan-vo --label org.opencontainers.image.revision="$GITHUB_SHA" --label org.opencontainers.image.description="Web UI component; requires separately configured backend. See PACKAGES.md." -t "$IMAGE:sha-$GITHUB_SHA" -f frontend/Dockerfile .
+      - name: Verify container serves the application
+        env:
+          IMAGE: ghcr.io/alandvo/threat-intel-analyzer-alan-vo-web
+        run: |
+          docker run -d --name web-smoke -p 127.0.0.1:18080:80 "$IMAGE:sha-$GITHUB_SHA"
+          trap 'docker logs web-smoke; docker rm -f web-smoke' EXIT
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:18080/ -o /tmp/index.html; then break; fi
+            sleep 2
+          done
+          test -s /tmp/index.html
+          grep -q '<div id="root"' /tmp/index.html
+          asset=$(grep -oE '/assets/[^" ]+\.js' /tmp/index.html | head -1)
+          test -n "$asset"
+          curl --fail --silent "http://127.0.0.1:18080$asset" -o /tmp/app.js
+          test -s /tmp/app.js
+      - name: Publish verified image
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          IMAGE: ghcr.io/alandvo/threat-intel-analyzer-alan-vo-web
+        run: |
+          echo "$GH_TOKEN" | docker login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
+          trap 'docker logout ghcr.io' EXIT
+          docker push "$IMAGE:sha-$GITHUB_SHA"
+          docker tag "$IMAGE:sha-$GITHUB_SHA" "$IMAGE:latest"
+          docker push "$IMAGE:latest"
+          echo "Published: $IMAGE:sha-$GITHUB_SHA" >> "$GITHUB_STEP_SUMMARY"
