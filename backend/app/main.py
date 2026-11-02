@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.requests import Request
 from starlette.responses import Response
-from app.api import assets, audit, auth, briefings, health, ml_eval, scans, vulnerabilities
+from app.api import assets, audit, auth, briefings, health, ml_eval, scans, stix, vulnerabilities
 from app.core.config import settings
 from app.core.database import SessionLocal, init_db
 from app.models.entities import AssetEntity, VulnerabilityEntity
@@ -47,7 +47,7 @@ def create_app() -> FastAPI:
     app = FastAPI(title=settings.APP_NAME, version=settings.APP_VERSION, description='Threat Intelligence Platform', lifespan=lifespan)
     app.add_middleware(SecurityHeadersMiddleware)
     app.add_middleware(CORSMiddleware, allow_origins=['http://127.0.0.1:3000', 'http://localhost:3000', 'http://127.0.0.1:5173', 'http://localhost:5173'], allow_credentials=True, allow_methods=['*'], allow_headers=['*'])
-    for r in [auth.router, vulnerabilities.router, assets.router, scans.router, briefings.router, audit.router, ml_eval.router]:
+    for r in [auth.router, vulnerabilities.router, assets.router, scans.router, briefings.router, audit.router, ml_eval.router, stix.router]:
         app.include_router(r, prefix='/api/v1')
     app.include_router(health.router)
     return app
