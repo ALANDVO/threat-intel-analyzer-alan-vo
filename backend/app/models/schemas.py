@@ -109,3 +109,23 @@ class AuditLogResponse(ORMModel):
 class HealthResponse(BaseModel):
     status: str; app: str; version: str; database_ok: bool; demo_mode: bool
     llm_configured: bool; llm_provider: str; llm_model: str
+
+class STIXImportRequest(BaseModel):
+    bundle: Dict[str, Any]
+
+
+class STIXImportResult(BaseModel):
+    vulnerabilities_imported: int
+    indicators_extracted: int
+    errors: List[str] = Field(default_factory=list)
+
+
+class STIXExportRequest(BaseModel):
+    vulnerability_ids: List[str] = Field(default_factory=list)
+    scan_id: Optional[str] = None
+    briefing_id: Optional[str] = None
+    title: str = "Threat Intelligence Export"
+
+
+class STIXExportResponse(BaseModel):
+    bundle: Dict[str, Any]
