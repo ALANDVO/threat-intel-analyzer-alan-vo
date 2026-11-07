@@ -16,3 +16,7 @@ The **Publish web container** workflow builds the existing frontend Dockerfile, 
 Public repository, standard Ubuntu runner, public container package. No paid runners or external LLM calls are used by this workflow.
 
 Maintainer: Alan Vo <alanvo@gmail.com>
+
+---
+
+Alan Vo · [alanvo.net](https://alanvo.net)

@@ -28,3 +28,7 @@ Found a bug? Open an issue with:
 
 ---
 **Alan Vo** — [GitHub](https://github.com/ALANDVO)
+
+---
+
+Alan Vo · [alanvo.net](https://alanvo.net)

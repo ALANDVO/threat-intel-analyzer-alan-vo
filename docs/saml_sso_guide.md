@@ -83,3 +83,7 @@ The repository includes a ready-to-use realm export in [`keycloak/realm-export.j
    Ensure NTP is synchronized across the backend host and SAML IdP. Default clock skew tolerance is 120 seconds.
 3. **Session Hardening**:
    All issued sessions use `HttpOnly`, `SameSite=Lax` (or `Strict`), and `Secure=True` in production. Mutating requests require cryptographic `X-CSRF-Token` headers.
+
+---
+
+Alan Vo · [alanvo.net](https://alanvo.net)

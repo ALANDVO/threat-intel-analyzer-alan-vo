@@ -92,3 +92,7 @@ SQLite holds application data. Stop writes before copying the database, keep enc
 MIT — see [LICENSE](LICENSE).
 
 Alan Vo · [GitHub](https://github.com/ALANDVO) · [alanvo@gmail.com](mailto:alanvo@gmail.com)
+
+---
+
+Alan Vo · [alanvo.net](https://alanvo.net)

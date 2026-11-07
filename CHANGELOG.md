@@ -67,3 +67,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Prototype command-line threat intelligence ingestion and sample CVE inspection script.
+
+---
+
+Alan Vo · [alanvo.net](https://alanvo.net)

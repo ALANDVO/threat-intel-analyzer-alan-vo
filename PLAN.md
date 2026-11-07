@@ -96,3 +96,6 @@ Acceptance:
 - Dispatches real-time event notifications when scans detect critical tier findings
 - Provides delivery retry policy with exponential backoff and audit tracking
 
+---
+
+Alan Vo · [alanvo.net](https://alanvo.net)
