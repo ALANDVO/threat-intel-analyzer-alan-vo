@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "current_feature": "ioc-detection-and-defanging-enhancement",
+  "current_feature": "cve-bulk-stix-import",
   "features": [
     {
       "id": "cve-normalization-and-ingestion",
@@ -98,14 +98,20 @@
     {
       "id": "cve-bulk-stix-import",
       "title": "STIX 2.1 threat intelligence bundle import and export",
-      "status": "in_progress",
+      "status": "done",
       "acceptance": [
         "Ingests STIX 2.1 vulnerability and indicator bundle JSON payloads",
         "Maps STIX objects to internal VulnerabilityEntity and IOC records",
         "Exports selected briefings and scan findings as STIX 2.1 bundles"
       ],
-      "implementation": [],
-      "tests": []
+      "implementation": [
+        "backend/app/services/stix_service.py",
+        "backend/app/api/stix.py",
+        "backend/app/models/schemas.py"
+      ],
+      "tests": [
+        "backend/tests/test_stix_service.py"
+      ]
     },
     {
       "id": "automated-webhook-alerts",

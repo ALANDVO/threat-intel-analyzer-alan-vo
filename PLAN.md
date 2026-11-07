@@ -4,7 +4,7 @@ Each round completes one feature or repair. Future items are planned, not implem
 
 ## Current round
 
-ioc-detection-and-defanging-enhancement
+cve-bulk-stix-import
 
 ## Roadmap
 
@@ -76,12 +76,16 @@ Tests: `backend/tests/test_domain_engines.py`
 
 ### cve-bulk-stix-import — STIX 2.1 threat intelligence bundle import and export
 
-Status: in_progress
+Status: done
 
 Acceptance:
 - Ingests STIX 2.1 vulnerability and indicator bundle JSON payloads
 - Maps STIX objects to internal VulnerabilityEntity and IOC records
 - Exports selected briefings and scan findings as STIX 2.1 bundles
+
+Implementation: `backend/app/services/stix_service.py`, `backend/app/api/stix.py`, `backend/app/models/schemas.py`
+
+Tests: `backend/tests/test_stix_service.py`
 
 ### automated-webhook-alerts — Automated security alert webhooks for critical findings
 

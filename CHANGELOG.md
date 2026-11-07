@@ -1,6 +1,21 @@
 # Changelog
 
-## 1.3.0 — work-in-progress checkpoint
+## 1.4.0 — work-in-progress checkpoint
+
+Partial code published for continued development. Known issues: STATUS.md.
+
+## 1.3.0 — 2026-11-07
+
+### Added
+- STIX 2.1 threat intelligence bundle import/export service (`backend/app/services/stix_service.py`).
+- REST API endpoints for STIX bundle import and export (`backend/app/api/stix.py`).
+- Import: Ingests STIX 2.1 bundles with Vulnerability and Indicator objects, maps to internal VulnerabilityEntity and IOC records.
+- Export: Exports vulnerabilities, scan findings, and security briefings as valid STIX 2.1 bundles with Identity, MarkingDefinition, and Relationship objects.
+- Comprehensive test suite for import, export, and roundtrip scenarios (`backend/tests/test_stix_service.py`).
+
+### Changed
+- Updated product development plan (`feature-plan.json`, `PLAN.md`) marking STIX feature complete.
+- Updated checkpoint status (`STATUS.md`).
 
 Partial code published for continued development. Known issues: STATUS.md.
 
