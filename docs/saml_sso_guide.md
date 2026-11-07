@@ -86,4 +86,4 @@ The repository includes a ready-to-use realm export in [`keycloak/realm-export.j
 
 ---
 
-Alan Vo · [alanvo.net](https://alanvo.net)
+Alan Vo · [alanvo.net](https://alanvo.net) · [X: @alanvoasi](https://x.com/alanvoasi)
