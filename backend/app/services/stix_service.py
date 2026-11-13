@@ -220,13 +220,8 @@ class STIXService:
             allow_custom=True
         )
 
-        try:
-            bundle_json = json.loads(bundle.serialize(pretty=True))
-        except Exception as e:
-            import sys
-            print(f"Error serializing STIX bundle: {e}", file=sys.stderr)
-            raise
-        return bundle_json
+        return json.loads(bundle.serialize(pretty=True))
+
     @classmethod
     def _create_vulnerability_object(cls, vuln: VulnerabilityEntity, identity_id: str, marking_id: str) -> Vulnerability:
         """Create a STIX Vulnerability object from internal entity."""
@@ -390,13 +385,8 @@ class STIXService:
             allow_custom=True
         )
 
-        try:
-            bundle_json = json.loads(bundle.serialize(pretty=True))
-        except Exception as e:
-            import sys
-            print(f"Error serializing STIX bundle: {e}", file=sys.stderr)
-            raise
-        return bundle_json
+        return json.loads(bundle.serialize(pretty=True))
+
     @classmethod
     def export_briefing(cls, briefing_data: Dict[str, Any]) -> Dict[str, Any]:
         """Export a security briefing as a STIX 2.1 bundle."""
@@ -482,10 +472,4 @@ class STIXService:
             allow_custom=True
         )
 
-        try:
-            bundle_json = json.loads(bundle.serialize(pretty=True))
-        except Exception as e:
-            import sys
-            print(f"Error serializing STIX bundle: {e}", file=sys.stderr)
-            raise
-        return bundle_json
+        return json.loads(bundle.serialize(pretty=True))
