@@ -3,7 +3,7 @@
 > Work in progress. This checkpoint may be incomplete or fail tests. See PLAN.md and STATUS.md before use.
 
 
-Current version: `1.0.0`.
+Current version: `1.7.0`.
 
 A threat intelligence workbench for security analysts: import vulnerability records, correlate affected package versions against assets, prioritize findings, and generate briefings. A deterministic weighted keyword classifier and evaluation harness provide an offline baseline for threat categorization. Optional LLM explanations use an interchangeable server-side API adapter.
 

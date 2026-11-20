@@ -88,3 +88,17 @@ class AuditLogEntity(Base):
     action, resource_type, resource_id = C(S(100), nullable=False, index=True), C(S(100), nullable=False), C(S(100), nullable=False)
     details, ip_address = C(J, nullable=False, default=dict), C(S(50), nullable=True)
     created_at = dtn(idx=True)
+
+class WebhookConfigurationEntity(Base):
+    __tablename__ = 'webhook_configurations'
+    id = pk()
+    name = C(S(255), unique=True, nullable=False, index=True)
+    endpoint_url = C(S(500), nullable=False)
+    hmac_secret = C(S(255), nullable=False)
+    events = C(J, nullable=False, default=list)
+    max_retries = C(I, nullable=False, default=3)
+    backoff_base_seconds = C(F, nullable=False, default=1.0)
+    timeout_seconds = C(I, nullable=False, default=10)
+    is_active = C(B, nullable=False, default=True)
+    created_at = dtn()
+    updated_at = C(DT(timezone=True), default=utc_now, onupdate=utc_now, nullable=False)
