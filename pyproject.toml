@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "threat-intel-analyzer-alan-vo"
-version = "1.7.0"
+version = "1.8.0"
 description = "AI-powered threat intelligence platform that ingests CVEs, IOC feeds, and news to produce prioritized, actionable security briefings with LLM-generated context and risk scoring."
 readme = "README.md"
 requires-python = ">=3.12"

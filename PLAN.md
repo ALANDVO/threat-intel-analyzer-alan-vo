@@ -89,7 +89,7 @@ Tests: `backend/tests/test_stix_service.py`
 
 ### automated-webhook-alerts — Automated security alert webhooks for critical findings
 
-Status: planned
+Status: in_progress
 
 Acceptance:
 - Configures outbound webhook endpoints with HMAC signature verification

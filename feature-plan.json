@@ -116,7 +116,7 @@
     {
       "id": "automated-webhook-alerts",
       "title": "Automated security alert webhooks for critical findings",
-      "status": "planned",
+      "status": "in_progress",
       "acceptance": [
         "Configures outbound webhook endpoints with HMAC signature verification",
         "Dispatches real-time event notifications when scans detect critical tier findings",
